@@ -1,0 +1,12 @@
+X The system needs to have 2 players 1 player being the computer
+X The system needs to provide a game board 3 x 3 grid
+X The user needs to be able to input into the game by clicking a square
+* The system should inform the user if they click on an occupied spot
+* The system should inform the user if they won or lost based on 3 user occupied boxes in a row
+X The system needs to make a move after the user does
+X The user can choose to be an X or an O
+X The system displays the users symbol based on which one they chose
+X The user can't switch between X and O
+X The user can choose restart or end the game after it finishes
+
+kristianmoore76@gmail.com
