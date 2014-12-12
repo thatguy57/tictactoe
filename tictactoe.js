@@ -72,15 +72,77 @@ function hasWon() {
 		}		
 	});
 
-	var isWin = checkWin(["1","2","3"], xcells);
-	console.log(isWin);
+	function ifWin() {
+		if (isXWin) {
+			$("table").hide();
 
-	if (isWin) {
-		$("table").hide();
-		$(".status").html("X won the game!");
+			if (userSymbol === "X") {
+				$(".status").html("The player won the game!");
+			} else {
+				$(".status").html("The computer won the game!");
+			}
+		}
+
+		if (isOWin) {
+			$("table").hide();
+
+			if (userSymbol === "O") {
+				$(".status").html("The player won the game!");
+			} else {
+				$(".status").html("The computer won the game!");
+			}
+		}
 	}
 
-	return isWin;
+	var isXWin = checkWin(["1","2","3"], xcells);
+	ifWin();
+
+	isXWin = checkWin(["4","5","6"], xcells);
+	ifWin();
+
+	isXWin = checkWin(["7","8","9"], xcells);
+	ifWin();
+
+	isXWin = checkWin(["1","4","7"], xcells);
+	ifWin();
+
+	isXWin = checkWin(["2","5","8"], xcells);
+	ifWin();
+
+	isXWin = checkWin(["3","6","9"], xcells);
+	ifWin();
+
+	isXWin = checkWin(["1","5","9"], xcells);
+	ifWin();
+
+	isXWin = checkWin(["3","5","7"], xcells);
+	ifWin();
+
+	var isOWin = checkWin(["1","2","3"], ocells);
+	ifWin();
+
+	isOWin = checkWin(["4","5","6"], ocells);
+	ifWin();
+
+	isOWin = checkWin(["7","8","9"], ocells);
+	ifWin();
+
+	isOWin = checkWin(["1","4","7"], ocells);
+	ifWin();
+
+	isOWin = checkWin(["2","5","8"], ocells);
+	ifWin();
+
+	isOWin = checkWin(["3","6","9"], ocells);
+	ifWin();
+
+	isOWin = checkWin(["1","5","9"], ocells);
+	ifWin();
+
+	isOWin = checkWin(["3","5","7"], ocells);
+	ifWin();
+
+	return isXWin, isOWin;
 }
 
 function makeAIMove() {
