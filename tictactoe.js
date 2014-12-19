@@ -1,5 +1,8 @@
 var userSymbol,
-	computerSymbol;
+		computerSymbol,
+		
+		userScore = 1,
+		computerScore = -1;
 
 $("button.choice").on("click", function(evt){
 
@@ -22,19 +25,52 @@ $("button.restart").on("click", function(evt){
 
 });
 
-
-
 $("td").on("click", function(evt){
+	var index = $(evt.currentTarget).data("index"),
+			hasWon;
 
 	makeHumanMove(evt);
 
-	hasWon();
+	if (scoreMove(index, userScore)) {
+		// declare the player a winner
+	}
 
-	makeAIMove();
-
-	hasWon();
+	// if (scoreMove(makeAIMove(), computerScore)) {
+	// 	// declare the computer a winner
+	// };
 
 });
+
+var gridLength = 3,
+
+		scores = {
+			rows: [0, 0, 0],
+			columns: [0, 0, 0],
+			diagonals: [0, 0]
+		}
+
+function scoreMove(index, score) {
+	var row = Math.ceil(index / gridLength),
+			column = index % gridLength || gridLength,
+			hasWon = false;
+
+	hasWon = (scores.rows[row - 1] += score) === gridLength;
+	hasWon = (scores.columns[column - 1] += score) === gridLength;
+
+	console.log(index != 1,  (index != gridLength * gridLength), (index % (gridLength - 1) === 1))
+
+	if (index !== 1 && (index !== gridLength * gridLength) && (index % (gridLength - 1) === 1)) {
+		hasWon = (scores.diagonals[1] += score) === gridLength;
+	}
+
+	if (index % (gridLength) === 1) {
+		hasWon = (scores.diagonals[0] += score) === gridLength;
+	}
+
+	console.log(scores, hasWon);
+
+	return hasWon;
+}
 
 function makeHumanMove(evt) {
 
@@ -148,9 +184,9 @@ function hasWon() {
 function makeAIMove() {
 
 	var unchosen = $("td:not(.chosen)"),
-		index = Math.floor(Math.random() * (unchosen.length - 1));
+			index = Math.floor(Math.random() * (unchosen.length - 1)),
+			choice = unchosen.eq(index).text(computerSymbol).addClass("chosen");
 
-	unchosen.eq(index).text(computerSymbol).addClass("chosen");
-
+	return choice.data("index");
 }
 
